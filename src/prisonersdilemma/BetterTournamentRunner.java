@@ -76,8 +76,9 @@ public class BetterTournamentRunner {
 
         int max = 0;
         GameStrategy winner = null;
-        for(StrategyResult entry : sortedScores) {
-            System.out.println(entry.strategy().getName() + "#" + playerNumbers.get(entry.strategy()) + ": " + scores.get(entry.strategy()));
+        for(int i = 0; i < sortedScores.size(); i++) {
+            StrategyResult entry = sortedScores.get(i);
+            System.out.println(sortedScores.size()-i + "\t" + entry.strategy().getName() + "#" + playerNumbers.get(entry.strategy()) + ": " + scores.get(entry.strategy()));
             if(scores.get(entry.strategy()) > max) {
                 winner = entry.strategy();
                 max = scores.get(entry.strategy());
