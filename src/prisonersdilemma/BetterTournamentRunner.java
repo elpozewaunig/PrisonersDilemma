@@ -24,7 +24,7 @@ public class BetterTournamentRunner {
     }
 
     public void run() {
-        int nRounds = Math.abs(rng.nextInt(1, 200));
+        int nRounds = rng.nextInt(1, 200);
 
         System.out.println("\n====== TOURNAMENT BEGINS ======");
         System.out.println("Round length: " + nRounds);
@@ -38,7 +38,7 @@ public class BetterTournamentRunner {
         }
 
         // Pit every strategy against every other strategy
-        System.out.println("\n====== MATCH ======");
+        System.out.println("\n====== MATCHES ======");
         List<StrategyResult> results = new ArrayList<>();
         for(int playerIndex = 0; playerIndex < players.size(); playerIndex++) {
             for(int opponentIndex = 0; opponentIndex < players.size(); opponentIndex++) {
