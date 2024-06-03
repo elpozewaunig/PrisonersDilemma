@@ -9,11 +9,17 @@ public class Main {
 
   public static void main(String[] args) {
     var players = List.of(
-        new CopyOtherPlayerStrategy(),
-        new PureTitForTatStrategy(),
-        new AlwaysDefectStrategy(),
-        new AlwaysCooperateStrategy(),
-        new RandomStrategy(),
+            // Classic/given strategies
+            new CopyOtherPlayerStrategy(),
+            new AlwaysCooperateStrategy(),
+            new RandomStrategy(),
+            new PureTitForTatStrategy(),
+            new AlwaysDefectStrategy(),
+            new GrimTriggerStrategy(),
+            new AlternateDefectCoopStrategy(),
+            new AlternateCoopDefectStrategy(),
+
+            // Complex/student-contributed strategies
             new SchwaigerStrategy(),
             new WolfgerStrategy(),
             new PozewaunigStrategy(),
