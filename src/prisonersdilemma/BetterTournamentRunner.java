@@ -26,7 +26,7 @@ public class BetterTournamentRunner {
     public void run() {
         int nRounds = Math.abs(rng.nextInt(200));
 
-        System.out.println("\n====== TOURNAMENT BEINGS ======");
+        System.out.println("\n====== TOURNAMENT BEGINS ======");
         System.out.println("Round length: " + nRounds);
 
         // Calibrate every player by pitting them against always defect
