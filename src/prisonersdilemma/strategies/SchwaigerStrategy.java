@@ -24,7 +24,7 @@ public class SchwaigerStrategy implements GameStrategy {
 
   @Override
   public String getName() {
-    return "The_Forbidden_Transmutation";
+    return "\033[36;1m" + "The_Forbidden_Transmutation" + "\033[0m";
   }
 
   @Override

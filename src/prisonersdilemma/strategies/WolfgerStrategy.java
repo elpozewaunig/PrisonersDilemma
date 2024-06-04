@@ -33,7 +33,7 @@ public class WolfgerStrategy implements GameStrategy {
 
     @Override
     public String getName() {
-        return "[Q1] TheArtfulWolfger";
+        return "\033[32;1m" + "[Q1] TheArtfulWolfger" + "\033[0m";
     }
 
     @Override

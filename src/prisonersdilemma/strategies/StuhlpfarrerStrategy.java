@@ -10,7 +10,7 @@ public class StuhlpfarrerStrategy implements GameStrategy {
 
     @Override
     public String getName() {
-        return "Forgiving_but_not_Peaceful"; //ist fast wie "tit for tat" aber am anfang wird angegriffen, und es wird 1 mal vergeben
+        return "\033[31;1m" + "Forgiving_but_not_Peaceful" + "\033[0m"; //ist fast wie "tit for tat" aber am anfang wird angegriffen, und es wird 1 mal vergeben
     }
 
     @Override

@@ -31,6 +31,4 @@ public class Main {
     // new TournamentRunner(new ArrayList<>(players)).run();
     new BetterTournamentRunner(new ArrayList<>(players)).run();
   }
-
-
 }

@@ -17,7 +17,7 @@ public class PozewaunigStrategy implements GameStrategy {
 
   @Override
   public String getName() {
-    return "ForgivingTitForTat(AlsoHasRabies)";
+    return "\033[34;1m" + "ForgivingTitForTat(AlsoHasRabies)" + "\033[0m";
   }
 
   @Override
