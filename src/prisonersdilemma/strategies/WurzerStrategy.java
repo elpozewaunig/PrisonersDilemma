@@ -16,11 +16,17 @@ public class WurzerStrategy implements GameStrategy{
   private GameStrategy[] opponents = new GameStrategy[testOpponentXTimes];
   private GameStrategy[] opponentsToReset = new GameStrategy[testOpponentXTimes];
 
+  /**
+   * return the name of the programm in the colours of witchcraft (ANSI Codes)
+   */
   @Override
   public String getName() {
     return "\033[35;49;1m[Q1] CheatingWurzel\033[0m";
   }
 
+  /**
+   * Using black magic to win
+   */
   @Override
   public GameAction playRound(GameState state) {
     roundCounter++; // new round
@@ -47,7 +53,7 @@ public class WurzerStrategy implements GameStrategy{
 
     try{ // try to cheat...
       // ...with letting the instances in the opponent array play and predict the action of the opponent by the action of its clones
-      // using clones, so that it's harder to detect the cheating try (i.e. Nuclear Gandis anti cheat method)
+      // using clones, so that it's harder to detect the cheating try (i.e. NuclearGandi's anti cheat method)
       // test reaction using current game state
       GameAction reaction = testOpponentArray(state);
       if (reaction == GameAction.COOPERATE) // opponent cooperated cooperate
@@ -84,7 +90,7 @@ public class WurzerStrategy implements GameStrategy{
 
   /**
    * create instances of opponent and save them in the opponents array in order to maybe get an advantage by trying
-   * to disclose the reaction of the opponent beforhand
+   * to disclose the reaction of the opponent beforehand
    */
   private void resetOpponentArray(GameStrategy otherPlayer){
     try { // try filling opponent Array up with instances of current opponent
@@ -100,7 +106,7 @@ public class WurzerStrategy implements GameStrategy{
   }
 
   /**
-   * evaluate wheter opponents responses where consistent (if not he probably plays a random strategy)
+   * evaluate whether opponents responses where consistent (if not he probably plays a random strategy)
    */
   private boolean reactionsAreConsistent(GameAction[] reactions){
     // evaluate reactions (should work with reactions.stream...) but it's late and I don't want to think ;)
@@ -144,7 +150,7 @@ public class WurzerStrategy implements GameStrategy{
 
 
   /**
-   * Reset the oppenent instances in the opponentsToReset Array and evaluate reactions
+   * Reset the opponent instances in the opponentsToReset Array and evaluate reactions
    */
   private GameAction resetAndTestOpponentArray(GameState state) {
     // get reactions
@@ -159,8 +165,8 @@ public class WurzerStrategy implements GameStrategy{
   }
 
   /**
-   * when reseting there was a consistent cooperation, so we will reset the Main Opponent instance
-   * to be able to make accurate preditions in the future, we will also reset all the clones that should be on the
+   * when resetting there was a consistent cooperation, so we will reset the Main Opponent instance
+   * to be able to make accurate predictions in the future, we will also reset all the clones that should be on the
    * same state as the main opponent
    */
   private void resetArrayBecauseOfAction(GameState state){
