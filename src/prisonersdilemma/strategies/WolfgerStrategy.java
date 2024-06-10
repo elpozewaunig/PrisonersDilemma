@@ -115,9 +115,9 @@ public class WolfgerStrategy implements GameStrategy {
         int maxDefections = (DETECTION_SAMPLE_SIZE / 2);
 
         if(defectionCount == maxDefections){
-            //Opponent defected in half the sample rounds so play TFTT strategy,
-            //so cooperation can be re-established
-            return new TFTT();
+            //Opponent defected in half the sample rounds so play GRIM strategy,
+            //to put him on probation
+            return new GRIM();
         }
 
         //Enemy defected in more than half the rounds in the sample size,
@@ -178,23 +178,16 @@ public class WolfgerStrategy implements GameStrategy {
     }
 
     /**
-     * Tit for two tats strategy
+     * Implements GRIM strategy, which does not forgive a defection
      */
-    static class TFTT implements Strategy {
+    static class GRIM implements Strategy{
 
         @Override
         public GameAction execute(List<GameAction> playerActions, List<GameAction> enemyActions) {
-            //Defects if the enemy defected twice in a row, else cooperates
-
-            if(enemyActions.size() < 2){
-                return GameAction.COOPERATE;
+            if(enemyActions.stream().anyMatch(ac -> ac.equals(GameAction.DEFECT))){
+                return GameAction.DEFECT;
             }
-            var lastEnemyAction = enemyActions.getLast();
-            var penultimateEnemyAction = enemyActions.get(enemyActions.size() - 2);
-
-            boolean defectedTwice = GameAction.DEFECT.equals(lastEnemyAction)
-                    && GameAction.DEFECT.equals(penultimateEnemyAction);
-            return defectedTwice ? GameAction.DEFECT : GameAction.COOPERATE;
+            return GameAction.COOPERATE;
         }
     }
 
