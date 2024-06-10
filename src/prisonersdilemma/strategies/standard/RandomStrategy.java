@@ -1,7 +1,9 @@
-package prisonersdilemma.strategies;
+package prisonersdilemma.strategies.standard;
 
 import prisonersdilemma.GameAction;
 import prisonersdilemma.GameState;
+import prisonersdilemma.strategies.GameStrategy;
+
 import java.util.Random;
 
 public class RandomStrategy implements GameStrategy {

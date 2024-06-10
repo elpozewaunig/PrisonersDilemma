@@ -1,7 +1,8 @@
-package prisonersdilemma.strategies;
+package prisonersdilemma.strategies.standard;
 
 import prisonersdilemma.GameAction;
 import prisonersdilemma.GameState;
+import prisonersdilemma.strategies.GameStrategy;
 
 public class GrimTriggerStrategy implements GameStrategy {
 

@@ -1,7 +1,9 @@
-package prisonersdilemma.strategies;
+package prisonersdilemma.strategies.q1;
 
 import prisonersdilemma.GameAction;
 import prisonersdilemma.GameState;
+import prisonersdilemma.strategies.GameStrategy;
+
 import java.util.List;
 
 

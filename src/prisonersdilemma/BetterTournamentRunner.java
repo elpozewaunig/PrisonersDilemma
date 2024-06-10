@@ -1,6 +1,6 @@
 package prisonersdilemma;
 
-import prisonersdilemma.strategies.AlwaysDefectStrategy;
+import prisonersdilemma.strategies.standard.AlwaysDefectStrategy;
 import prisonersdilemma.strategies.GameStrategy;
 
 import java.util.ArrayList;
@@ -68,11 +68,7 @@ public class BetterTournamentRunner {
             sortedScores.add(new StrategyResult(strategy, scores.get(strategy)));
         }
 
-        sortedScores.sort(new Comparator<StrategyResult>() {
-            public int compare(StrategyResult s1, StrategyResult s2) {
-                return (s1.points() - s2.points());
-            }
-        });
+        sortedScores.sort(Comparator.comparingInt(StrategyResult::points));
 
         int max = 0;
         GameStrategy winner = null;

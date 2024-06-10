@@ -1,6 +1,7 @@
 package prisonersdilemma;
 
-import prisonersdilemma.strategies.*;
+import prisonersdilemma.strategies.q1.*;
+import prisonersdilemma.strategies.standard.*;
 
 import java.util.ArrayList;
 import java.util.List;
