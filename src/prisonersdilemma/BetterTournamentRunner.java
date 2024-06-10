@@ -1,6 +1,6 @@
 package prisonersdilemma;
 
-import prisonersdilemma.strategies.AlwaysDefectStrategy;
+import prisonersdilemma.strategies.standard.AlwaysDefectStrategy;
 import prisonersdilemma.strategies.GameStrategy;
 
 import java.util.ArrayList;
