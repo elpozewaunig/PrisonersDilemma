@@ -11,7 +11,7 @@ public class Main {
   public static void main(String[] args) {
     var players = List.of(
             // Classic/given strategies
-            new CopyOtherPlayerStrategy(),
+            new CopyOppositeStrategy(),
             new AlwaysCooperateStrategy(),
             new RandomStrategy(),
             new PureTitForTatStrategy(),

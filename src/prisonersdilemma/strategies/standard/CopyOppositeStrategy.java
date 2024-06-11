@@ -4,11 +4,11 @@ import prisonersdilemma.GameAction;
 import prisonersdilemma.GameState;
 import prisonersdilemma.strategies.GameStrategy;
 
-public class CopyOtherPlayerStrategy implements GameStrategy {
+public class CopyOppositeStrategy implements GameStrategy {
 
   @Override
   public String getName() {
-    return "Copycat";
+    return "InverseCopycat";
   }
 
   @Override
