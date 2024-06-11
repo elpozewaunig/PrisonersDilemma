@@ -72,21 +72,28 @@ public class BetterTournamentRunner {
 
         sortedScores.sort(Comparator.comparingInt(StrategyResult::points));
 
-        // Print out the scores in order and determine the winner
+        // Print out the scores in order and determine the winner(s), strategies may be tied
         int max = 0;
-        GameStrategy winner = null;
+        ArrayList<GameStrategy> winners = new ArrayList<>();
         for(int i = 0; i < sortedScores.size(); i++) {
             StrategyResult entry = sortedScores.get(i);
             System.out.println(sortedScores.size()-i + "\t" + entry.strategy().getName() + "#" + playerNumbers.get(entry.strategy()) + ": " + scores.get(entry.strategy()));
+
             if(scores.get(entry.strategy()) > max) {
-                winner = entry.strategy();
+                winners.clear();
+                winners.add(entry.strategy());
                 max = scores.get(entry.strategy());
+            }
+            else if(scores.get(entry.strategy()) == max) {
+                winners.add(entry.strategy());
             }
         }
 
         System.out.println("\n====== ULTIMATE WINNER ======");
-        if(winner != null) {
-            System.out.printf("%s#%d: %d%n", winner.getName(), playerNumbers.get(winner), scores.get(winner));
+        if(!winners.isEmpty()) {
+            for(GameStrategy winner : winners) {
+                System.out.printf("%s#%d: %d%n", winner.getName(), playerNumbers.get(winner), scores.get(winner));
+            }
         }
         else {
             System.out.println("No strategies competed!");
