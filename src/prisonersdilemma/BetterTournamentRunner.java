@@ -50,6 +50,7 @@ public class BetterTournamentRunner {
 
         System.out.println("\n====== FINAL SCORES ======");
 
+        // Create a HashMap summing up the total points of each strategy
         HashMap<GameStrategy, Integer> scores = new HashMap<>();
         for(GameStrategy strategy : players) {
             for (StrategyResult result : results) {
@@ -63,6 +64,7 @@ public class BetterTournamentRunner {
             }
         }
 
+        // Create an ArrayList out of the HashMap so the scores can be sorted
         ArrayList<StrategyResult> sortedScores = new ArrayList<>();
         for(GameStrategy strategy : scores.keySet()) {
             sortedScores.add(new StrategyResult(strategy, scores.get(strategy)));
@@ -70,6 +72,7 @@ public class BetterTournamentRunner {
 
         sortedScores.sort(Comparator.comparingInt(StrategyResult::points));
 
+        // Print out the scores in order and determine the winner
         int max = 0;
         GameStrategy winner = null;
         for(int i = 0; i < sortedScores.size(); i++) {
@@ -80,7 +83,6 @@ public class BetterTournamentRunner {
                 max = scores.get(entry.strategy());
             }
         }
-
 
         System.out.println("\n====== ULTIMATE WINNER ======");
         if(winner != null) {
