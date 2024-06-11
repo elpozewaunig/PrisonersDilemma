@@ -49,7 +49,7 @@ public class WolfgerStrategy implements GameStrategy {
             playerActions.clear();
         }
 
-        if(maxRounds != null && roundsPlayed >= maxRounds - 1){
+        if(maxRounds != null && roundsPlayed >= maxRounds){
             //Always defect in last round
             return GameAction.DEFECT;
         }
