@@ -15,6 +15,7 @@ public class Main {
             new AlwaysCooperateStrategy(),
             new RandomStrategy(),
             new PureTitForTatStrategy(),
+            new BadStartTitForTatStrategy(),
             new AlwaysDefectStrategy(),
             new GrimTriggerStrategy(),
             new AlternateDefectCoopStrategy(),
