@@ -53,23 +53,30 @@ public class PozewaunigStrategy implements GameStrategy {
     }
 
     // Analyze initial turns of opponent and decide whether to always defect or play tit-for-tat
-    // If opponent plays a non-tit-for-tat-based pattern (i.e. defects in the first five rounds), we always defect.
-    // The opponent is likely to either play random patterns or always defect
+    // If opponent defects in the first five rounds, two scenarios are likely
+    // Scenario 1: The opponent might take the risk to "probe" our strategy to test its reaction to a defect
+    // In this case we allow exactly one opponent defect,
+    // and continue to play tit-for-tat if the opponent resumes playing tit-for-tat too
+    // Scenario 2: The opponent is likely to either play random patterns or always defect
     // In case of "random", we will make bigger average gains by defecting.
     // In case of "always defect", we prevent any chance of forgiveness.
-    // "Always cooperate" will still be played against with our classic tit-for-tat
-    // as it matches the behaviour of tit-for-tat for our input.
-    // We don't want to risk "angering" them, by testing whether they truly are tit-for-tat
+    // Thus, if more than one defect occurs during the analysis, we switch to only defecting
+    // "Always cooperate" will still be played against with our classic tit-for-tat as no defects occur
+    // We don't want to risk "angering" the opponent strategy, by testing whether they truly are tit-for-tat
     // as that might hurt our score substantially if they are.
     int analyzeDepth = 5;
-    // For analysis we need to have played one more turn than depth, analysis only works on reaction turns (not on first)
-    if(currentTurn > analyzeDepth+1) {
+    int analysisDefectCount = 0;
+    // currentTurn must be bigger than analyzeDepth, as the current turn doesn't have any associated game actions yet
+    if(currentTurn > analyzeDepth) {
       // We stop before analyzeDepth, as the turn index starts at 0, analyzeDepth starts at 1
       for(int i = 0; i < analyzeDepth; i++) {
-        if(!(opponentTurns.get(i+1) == myTurns.get(i))) {
-          alwaysDefectSwitch = true;
-          break;
+        if(opponentTurns.get(i) == GameAction.DEFECT) {
+          analysisDefectCount++;
         }
+      }
+
+      if(analysisDefectCount > 1) {
+        alwaysDefectSwitch = true;
       }
     }
 
