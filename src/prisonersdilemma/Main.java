@@ -20,6 +20,9 @@ public class Main {
             new GrimTriggerStrategy(),
             new AlternateDefectCoopStrategy(),
             new AlternateCoopDefectStrategy(),
+            new TwoTitsForTatStrategy(),
+            new TitForTwoTatsStrategy(),
+            new TFTTAdvancedStrategy(),
 
             // Complex/student-contributed strategies
             new SchwaigerStrategy(),
