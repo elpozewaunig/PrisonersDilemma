@@ -84,7 +84,7 @@ public class BetterTournamentRunner {
             sortedScores.sort(Comparator.comparingInt(StrategyResult::points));
 
             // Print out the scores in order and determine the winner(s), strategies may be tied
-            int max = 0;
+            winners.clear();
             for (int i = 0; i < sortedScores.size(); i++) {
                 StrategyResult entry = sortedScores.get(i);
 
@@ -96,16 +96,11 @@ public class BetterTournamentRunner {
                     posCompare++;
                 }
 
-                System.out.println(rank + "\t" + entry.strategy().getName() + "#" + playerNumbers.get(entry.strategy()) + ": " + scores.get(entry.strategy()));
+                if (rank == 1) {
+                    winners.add(entry.strategy());
+                }
 
-                if (scores.get(entry.strategy()) > max) {
-                    winners.clear();
-                    winners.add(entry.strategy());
-                    max = scores.get(entry.strategy());
-                }
-                else if (scores.get(entry.strategy()) == max) {
-                    winners.add(entry.strategy());
-                }
+                System.out.println(rank + "\t" + entry.strategy().getName() + "#" + playerNumbers.get(entry.strategy()) + ": " + scores.get(entry.strategy()));
             }
 
             // Eliminate bottom half of strategies, if strategies are tied with the cutoff score, they persist
