@@ -87,7 +87,16 @@ public class BetterTournamentRunner {
             int max = 0;
             for (int i = 0; i < sortedScores.size(); i++) {
                 StrategyResult entry = sortedScores.get(i);
-                System.out.println(sortedScores.size() - i + "\t" + entry.strategy().getName() + "#" + playerNumbers.get(entry.strategy()) + ": " + scores.get(entry.strategy()));
+
+                // When a strategy is tied, lower its rank to match the best-ranking strategy with the same score
+                int rank = sortedScores.size() - i;
+                int posCompare = i+1;
+                while(posCompare < sortedScores.size() && entry.points() == sortedScores.get(posCompare).points()) {
+                    rank--;
+                    posCompare++;
+                }
+
+                System.out.println(rank + "\t" + entry.strategy().getName() + "#" + playerNumbers.get(entry.strategy()) + ": " + scores.get(entry.strategy()));
 
                 if (scores.get(entry.strategy()) > max) {
                     winners.clear();
