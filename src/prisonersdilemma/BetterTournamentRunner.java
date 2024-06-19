@@ -115,7 +115,7 @@ public class BetterTournamentRunner {
         } while(players.size() > 2);
         // Abort if only 2 strategies remain, as such a match produces inconclusive results
 
-        System.out.println("\n====== ULTIMATE WINNER ======");
+        System.out.println("\n====== ULTIMATE WINNER" + (winners.size() > 1 ? "S" : "") + " ======");
         if(!winners.isEmpty()) {
             for(GameStrategy winner : winners) {
                 System.out.printf("%s#%d: %d%n", winner.getName(), playerNumbers.get(winner), scores.get(winner));
