@@ -46,7 +46,8 @@ public class Main {
             new PItifulAttemptToBeatMeStrategy(),
             new SneakyCopiesStrategy(),
             new SometimesRandomStrategy(),
-            new TheWinnerStrategy()
+            new TheWinnerStrategy(),
+            new TheArtfulWolveStrategy()
     );
 
     // new TournamentRunner(new ArrayList<>(players)).run();
