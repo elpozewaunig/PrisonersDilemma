@@ -25,16 +25,18 @@ public class Main {
             new TitForTwoTatsStrategy(),
             new TFTTAdvancedStrategy(),
 
-            // Complex/student-contributed strategies
+            // Team-contributed strategies
             new SchwaigerStrategy(),
             new WolfgerStrategy(),
             new PozewaunigStrategy(),
             new MuellauerStrategy(),
             new WurzerStrategy(),
             new StuhlpfarrerStrategy(),
+
+            // Other student's strategies
             new Agent47(),
             new Agent48(),
-            //new CloneStrat3000Strategy(), -> Erzeugt StackOverflow
+            //new CloneStrat3000Strategy(), -> creates StackOverflow
             new DarknessDestroyer2000Strategy(),
             new DolorStrategy(),
             new IpsumStrategy(),
