@@ -23,7 +23,6 @@ public class PozewaunigStrategy implements GameStrategy {
 
   @Override
   public GameAction playRound(GameState state) {
-    List<GameAction> myTurns = myTurns(state);
     List<GameAction> opponentTurns = opponentTurns(state);
 
     boolean alwaysDefectSwitch = false;
@@ -137,15 +136,6 @@ public class PozewaunigStrategy implements GameStrategy {
     // The "tit-for-tat" part
     // We perform a classic tit-for-tat in most cases
     return otherPlayerAction.getLast();
-  }
-
-  private List<GameAction> myTurns(GameState state) {
-    if(this == state.player1()) {
-      return state.player1Actions();
-    }
-    else {
-      return state.player2Actions();
-    }
   }
 
   private List<GameAction> opponentTurns(GameState state) {
