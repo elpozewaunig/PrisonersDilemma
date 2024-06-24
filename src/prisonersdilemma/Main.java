@@ -47,7 +47,8 @@ public class Main {
             new SneakyCopiesStrategy(),
             new SometimesRandomStrategy(),
             new TheWinnerStrategy(),
-            new TheArtfulWolveStrategy()
+            new TheArtfulWolveStrategy(),
+            new ForgivingTitForTatAlsoHasRabiesStrategy()
     );
 
     // new TournamentRunner(new ArrayList<>(players)).run();
