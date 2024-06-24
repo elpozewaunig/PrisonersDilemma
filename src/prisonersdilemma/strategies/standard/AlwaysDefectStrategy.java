@@ -8,7 +8,7 @@ public class AlwaysDefectStrategy implements GameStrategy {
 
     @Override
     public String getName() {
-        return "AlwaysDefect";
+        return "TheKlemensWibmer";
     }
 
     @Override
