@@ -2,6 +2,7 @@ package prisonersdilemma.strategies.others;
 
 import prisonersdilemma.GameAction;
 import prisonersdilemma.GameState;
+import prisonersdilemma.strategies.GameStrategy;
 
 import java.util.List;
 import java.util.Random;
@@ -19,7 +20,7 @@ public class LoremStrategy implements GameStrategy {
 
   @Override
   public GameAction playRound(GameState state) {
-    List<GameAction> opponentActions = state.getPlayer2Actions();
+    List<GameAction> opponentActions = state.player2Actions();
 
     // Erste Runde defect, um vorsprung eventuell zu erschaffen
     if (opponentActions.isEmpty()) {

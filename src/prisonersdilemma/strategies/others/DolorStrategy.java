@@ -2,6 +2,7 @@ package prisonersdilemma.strategies.others;
 
 import prisonersdilemma.GameAction;
 import prisonersdilemma.GameState;
+import prisonersdilemma.strategies.GameStrategy;
 
 import java.util.List;
 

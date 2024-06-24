@@ -2,6 +2,7 @@ package prisonersdilemma.strategies.others;
 
 import prisonersdilemma.GameAction;
 import prisonersdilemma.GameState;
+import prisonersdilemma.strategies.GameStrategy;
 
 import java.util.Random;
 
@@ -17,8 +18,8 @@ public class TheWinnerStrategy implements GameStrategy {
     @Override
     public GameAction playRound(GameState state) {
         roundCounter++;
-        int lastRoundIndex = state.getPlayer2Actions().size() - 1;
-        GameAction lastOpponentAction = lastRoundIndex >= 0 ? state.getPlayer2Actions().get(lastRoundIndex) : GameAction.DEFECT;
+        int lastRoundIndex = state.player2Actions().size() - 1;
+        GameAction lastOpponentAction = lastRoundIndex >= 0 ? state.player2Actions().get(lastRoundIndex) : GameAction.DEFECT;
 
         if (roundCounter == 1) {
             return GameAction.DEFECT;
