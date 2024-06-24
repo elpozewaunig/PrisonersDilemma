@@ -90,10 +90,10 @@ public class BetterTournamentRunner {
 
                 // When a strategy is tied, lower its rank to match the best-ranking strategy with the same score
                 int rank = sortedScores.size() - i;
-                int posCompare = i+1;
-                while(posCompare < sortedScores.size() && entry.points() == sortedScores.get(posCompare).points()) {
+                for(int posCompare = i+1;
+                    posCompare < sortedScores.size() && entry.points() == sortedScores.get(posCompare).points();
+                    posCompare++) {
                     rank--;
-                    posCompare++;
                 }
 
                 if (rank == 1) {
