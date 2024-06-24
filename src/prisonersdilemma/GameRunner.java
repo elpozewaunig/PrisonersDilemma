@@ -25,15 +25,21 @@ public class GameRunner {
 
   public GameResult play() {
     for (int i = 0; i < nRuns; i++) {
-      var gameState = new GameState(
+      var gameState1 = new GameState(
           player1,
-          player2,
+          new AnonymizedStrategy(player2),
           new ArrayList<>(player1Actions),
           new ArrayList<>(player2Actions)
       );
+      var gameState2 = new GameState(
+              new AnonymizedStrategy(player1),
+              player2,
+              new ArrayList<>(player1Actions),
+              new ArrayList<>(player2Actions)
+      );
 
-      var nextResult1 = player1.playRound(gameState);
-      var nextResult2 = player2.playRound(gameState);
+      var nextResult1 = player1.playRound(gameState1);
+      var nextResult2 = player2.playRound(gameState2);
 
       player1Actions.add(nextResult1);
       player2Actions.add(nextResult2);
