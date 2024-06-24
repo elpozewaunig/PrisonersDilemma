@@ -2,6 +2,7 @@ package prisonersdilemma.strategies.others;
 
 import prisonersdilemma.GameAction;
 import prisonersdilemma.GameState;
+import prisonersdilemma.strategies.GameStrategy;
 
 import java.util.Random;
 
@@ -25,8 +26,8 @@ public class SometimesRandomStrategy implements GameStrategy {
       return GameAction.DEFECT;
     }
 
-    if (!state.getPlayer2Actions().isEmpty()) {
-      opponentDefect = state.getPlayer2Actions().get(state.getPlayer2Actions().size() - 1) == GameAction.DEFECT;
+    if (!state.player2Actions().isEmpty()) {
+      opponentDefect = state.player2Actions().get(state.player2Actions().size() - 1) == GameAction.DEFECT;
     }
 
     if (opponentDefect) {
