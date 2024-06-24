@@ -1,6 +1,7 @@
-package prisonersdilemma;
+package prisonersdilemma.strategies;
 
-import prisonersdilemma.strategies.GameStrategy;
+import prisonersdilemma.GameAction;
+import prisonersdilemma.GameState;
 
 public class AnonymizedStrategy implements GameStrategy {
     private final GameStrategy strategy;

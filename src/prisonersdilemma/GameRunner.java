@@ -1,5 +1,6 @@
 package prisonersdilemma;
 
+import prisonersdilemma.strategies.AnonymizedStrategy;
 import prisonersdilemma.strategies.GameStrategy;
 import java.util.ArrayList;
 import java.util.List;
