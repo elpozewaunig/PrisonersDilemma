@@ -25,14 +25,6 @@ public class Main {
             new TitForTwoTatsStrategy(),
             new TFTTAdvancedStrategy(),
 
-            // Team-contributed strategies
-            new SchwaigerStrategy(),
-            new WolfgerStrategy(),
-            new PozewaunigStrategy(),
-            new MuellauerStrategy(),
-            new WurzerStrategy(),
-            new StuhlpfarrerStrategy(),
-
             // Other student's strategies
             new Agent47(),
             new Agent48(),
@@ -48,7 +40,15 @@ public class Main {
             new SometimesRandomStrategy(),
             new TheWinnerStrategy(),
             new TheArtfulWolveStrategy(),
-            new ForgivingTitForTatAlsoHasRabiesStrategy()
+            new ForgivingTitForTatAlsoHasRabiesStrategy(),
+
+            // Team-contributed strategies
+            new SchwaigerStrategy(),
+            new WolfgerStrategy(),
+            new PozewaunigStrategy(),
+            new MuellauerStrategy(),
+            new WurzerStrategy(),
+            new StuhlpfarrerStrategy()
     );
 
     // new TournamentRunner(new ArrayList<>(players)).run();
