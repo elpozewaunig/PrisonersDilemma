@@ -16,7 +16,7 @@ public class BetterTournamentRunner {
 
     private static final Random rng = new Random();
 
-    private int errorCount;
+    private int errorCount = 0;
 
     public BetterTournamentRunner(List<GameStrategy> players) {
         this.players = players;
@@ -27,7 +27,6 @@ public class BetterTournamentRunner {
 
     public void run() {
         int nRounds = rng.nextInt(1, 200);
-        errorCount = 0;
 
         System.out.println("\n====== TOURNAMENT BEGINS ======");
         System.out.println("Round length: " + nRounds);
@@ -42,6 +41,7 @@ public class BetterTournamentRunner {
 
         // Pit every strategy against every other strategy
         System.out.println("\n====== MATCHES ======");
+        errorCount = 0;
         List<StrategyMatchResult> results = new ArrayList<>();
         for(int playerIndex = 0; playerIndex < players.size(); playerIndex++) {
             for(int opponentIndex = 0; opponentIndex < players.size(); opponentIndex++) {
