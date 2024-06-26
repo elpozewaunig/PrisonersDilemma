@@ -16,6 +16,8 @@ public class BetterTournamentRunner {
 
     private static final Random rng = new Random();
 
+    private int errorCount;
+
     public BetterTournamentRunner(List<GameStrategy> players) {
         this.players = players;
         for (var player : players) {
@@ -25,6 +27,7 @@ public class BetterTournamentRunner {
 
     public void run() {
         int nRounds = rng.nextInt(1, 200);
+        errorCount = 0;
 
         System.out.println("\n====== TOURNAMENT BEGINS ======");
         System.out.println("Round length: " + nRounds);
@@ -128,6 +131,15 @@ public class BetterTournamentRunner {
         else {
             System.out.println("No strategies competed!");
         }
+
+        System.out.println("\nStats:");
+        System.out.println(playerNumbers.size() + " strategies competed");
+        System.out.println("A match consisted of " + nRounds + " rounds");
+        System.out.println(results.size()/2 + " matches were played");
+        if(errorCount > 0) {
+            System.out.print("\033[31m");
+        }
+        System.out.println(errorCount + " of them resulted in an error or exception \033[0m");
     }
 
     private void playRound(GameStrategy player1, GameStrategy player2, List<StrategyMatchResult> results, int nRounds) {
@@ -148,6 +160,10 @@ public class BetterTournamentRunner {
             System.out.println();
         }
         catch(Throwable e) {
+            results.add(new StrategyMatchResult(player1, 0, player2));
+            results.add(new StrategyMatchResult(player2, 0, player1));
+            errorCount++;
+
             printMatchResult(player1, player2, 0, 0);
             System.out.print("\033[1m -> \033[41m " + e.getClass().getSimpleName() + " \033[0m");
             System.out.println();
