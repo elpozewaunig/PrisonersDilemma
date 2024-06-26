@@ -1,6 +1,6 @@
 package prisonersdilemma;
 
-import prisonersdilemma.strategies.AnonymizedStrategy;
+import prisonersdilemma.strategies.AnonymousStrategy;
 import prisonersdilemma.strategies.GameStrategy;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,13 +27,13 @@ public class GameRunner {
   public GameResult play() {
     for (int i = 0; i < nRuns; i++) {
       var gameState1 = new GameState(
-          player1,
-          new AnonymizedStrategy(player2),
-          new ArrayList<>(player1Actions),
-          new ArrayList<>(player2Actions)
+              player1,
+              new AnonymousStrategy(),
+              new ArrayList<>(player1Actions),
+              new ArrayList<>(player2Actions)
       );
       var gameState2 = new GameState(
-              new AnonymizedStrategy(player1),
+              new AnonymousStrategy(),
               player2,
               new ArrayList<>(player1Actions),
               new ArrayList<>(player2Actions)
