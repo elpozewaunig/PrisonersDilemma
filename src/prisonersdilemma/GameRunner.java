@@ -9,6 +9,7 @@ public class GameRunner {
 
   // not constant for each competition
   private final int nRuns;
+  private final boolean anticheat;
 
   private final GameStrategy player1;
   private final GameStrategy player2;
@@ -22,10 +23,17 @@ public class GameRunner {
     this.nRuns = nRuns;
     this.player1 = player1;
     this.player2 = player2;
+    this.anticheat = true;
   }
 
   public GameResult play() {
     for (int i = 0; i < nRuns; i++) {
+      var gameState = new GameState(
+              player1,
+              player2,
+              new ArrayList<>(player1Actions),
+              new ArrayList<>(player2Actions)
+      );
       var gameState1 = new GameState(
               player1,
               new AnonymousStrategy(),
@@ -39,8 +47,17 @@ public class GameRunner {
               new ArrayList<>(player2Actions)
       );
 
-      var nextResult1 = player1.playRound(gameState1);
-      var nextResult2 = player2.playRound(gameState2);
+      GameAction nextResult1;
+      GameAction nextResult2;
+      
+      if(anticheat) {
+        nextResult1 = player1.playRound(gameState1);
+        nextResult2 = player2.playRound(gameState2);
+      }
+      else {
+        nextResult1 = player1.playRound(gameState);
+        nextResult2 = player2.playRound(gameState);
+      }
 
       player1Actions.add(nextResult1);
       player2Actions.add(nextResult2);
