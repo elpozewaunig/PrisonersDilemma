@@ -36,7 +36,7 @@ public class Main {
             // Other student's strategies
             new Agent47(),
             new Agent48(),
-            //new CloneStrat3000Strategy(), -> creates StackOverflow
+            new CloneStrat3000Strategy(),
             new DarknessDestroyer2000Strategy(),
             new DolorStrategy(),
             new IpsumStrategy(),

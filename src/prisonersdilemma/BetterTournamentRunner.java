@@ -138,18 +138,30 @@ public class BetterTournamentRunner {
                 player2
         );
 
-        var result = game.play();
+        try {
+            GameResult result = game.play();
 
-        results.add(new StrategyMatchResult(player1, result.player1Score(), player2));
-        results.add(new StrategyMatchResult(player2, result.player2Score(), player1));
+            results.add(new StrategyMatchResult(player1, result.player1Score(), player2));
+            results.add(new StrategyMatchResult(player2, result.player2Score(), player1));
 
-        System.out.printf("%s#%d vs %s#%d: %d:%d%n",
+            printMatchResult(player1, player2, result.player1Score(), result.player2Score());
+            System.out.println();
+        }
+        catch(Throwable e) {
+            printMatchResult(player1, player2, 0, 0);
+            System.out.print("\033[1m -> \033[41m " + e.getClass().getSimpleName() + " \033[0m");
+            System.out.println();
+        }
+    }
+
+    public void printMatchResult(GameStrategy player1, GameStrategy player2, int player1Score, int player2Score) {
+        System.out.printf("%s#%d vs %s#%d: %d:%d",
                 player1.getName(),
                 playerNumbers.get(player1),
                 player2.getName(),
                 playerNumbers.get(player2),
-                result.player1Score(),
-                result.player2Score()
+                player1Score,
+                player2Score
         );
     }
 

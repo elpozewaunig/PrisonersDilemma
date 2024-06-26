@@ -21,6 +21,7 @@ As played by the `BetterTournamentRunner`class
   | 5      | Defect    | Cooperate           |
 
 * The scores of a match are summed up for both strategies and stored
+  * If an exception or an error occurs during a match, the match is skipped and both strategies receive 0 points for this match
 * The final score for a strategy is the **sum of its points** across all matches
 * As some strategies may perform very poorly and boost specific strategies with their behaviour, the **bottom half of the scoreboard is eliminated**
   * If strategies are tied at the elimination cutoff score, they persist
