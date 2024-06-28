@@ -134,6 +134,7 @@ public class BetterTournamentRunner {
 
         var game = new GameRunner(
                 nRounds,
+                true,
                 player1,
                 player2
         );

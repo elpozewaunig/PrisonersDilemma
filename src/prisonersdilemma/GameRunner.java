@@ -9,7 +9,7 @@ public class GameRunner {
 
   // not constant for each competition
   private final int nRuns;
-  private final boolean anticheat;
+  private boolean anticheat = false;
 
   private final GameStrategy player1;
   private final GameStrategy player2;
@@ -23,7 +23,11 @@ public class GameRunner {
     this.nRuns = nRuns;
     this.player1 = player1;
     this.player2 = player2;
-    this.anticheat = true;
+  }
+
+  public GameRunner(int nRuns, boolean anticheat, GameStrategy player1, GameStrategy player2) {
+    this(nRuns, player1, player2);
+    this.anticheat = anticheat;
   }
 
   public GameResult play() {
