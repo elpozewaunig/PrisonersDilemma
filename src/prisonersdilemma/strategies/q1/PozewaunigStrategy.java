@@ -27,8 +27,8 @@ public class PozewaunigStrategy implements GameStrategy {
 
     boolean alwaysDefectSwitch = false;
 
-    // If there are no player actions but there previously were, we know that a new round has started
-    if(state.player1Actions().isEmpty() || state.player2Actions().isEmpty()) {
+    // If there are no player actions, we know that a new round has started
+    if(opponentTurns.isEmpty()) {
       currentTurn = 0;
     }
     else {
@@ -36,7 +36,7 @@ public class PozewaunigStrategy implements GameStrategy {
     }
 
     // If no actions are in the game state even though we know there previously were, we know that the first round is over
-    if((state.player1Actions().isEmpty() || state.player2Actions().isEmpty()) && turnPlayed) {
+    if((opponentTurns.isEmpty()) && turnPlayed) {
       firstRoundPlayed = true;
     }
 
@@ -85,17 +85,8 @@ public class PozewaunigStrategy implements GameStrategy {
       return GameAction.DEFECT;
     }
 
-    // Obtain list of other player's actions
-    List<GameAction> otherPlayerAction;
-    if(this == state.player1()) {
-      otherPlayerAction = state.player2Actions();
-    }
-    else {
-      otherPlayerAction = state.player1Actions();
-    }
-
     // Start by cooperating
-    if(state.player1Actions().isEmpty()) {
+    if(opponentTurns.isEmpty()) {
       return GameAction.COOPERATE;
     }
 
@@ -105,7 +96,7 @@ public class PozewaunigStrategy implements GameStrategy {
     // if the opponent is a "rational" actor that was "testing the waters"
     // We may potentially score lower than the opponent by doing this
     // But we should accumulate more points than without this switch, as this allows us to get back to larger gains
-    if(otherPlayerAction.getLast() == GameAction.DEFECT && !preventForgiveness) {
+    if(opponentTurns.getLast() == GameAction.DEFECT && !preventForgiveness) {
 
       Random r = new Random();
       if(r.nextFloat() < probabilityOfForgiveness) {
@@ -128,14 +119,14 @@ public class PozewaunigStrategy implements GameStrategy {
     }
 
     // We previously forgave the opponent and the opponent does cooperate again
-    if(otherPlayerAction.getLast() == GameAction.COOPERATE && preventForgiveness) {
+    if(opponentTurns.getLast() == GameAction.COOPERATE) {
       preventForgiveness = false;
       // We allow forgiveness again
     }
 
     // The "tit-for-tat" part
     // We perform a classic tit-for-tat in most cases
-    return otherPlayerAction.getLast();
+    return opponentTurns.getLast();
   }
 
   private List<GameAction> opponentTurns(GameState state) {
