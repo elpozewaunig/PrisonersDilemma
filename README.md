@@ -3,6 +3,7 @@
 This is a Java project created as part of the Object-oriented modelling and implementation (OMI) course at the University of Klagenfurt during the summer semester 2024. It collects submissions for an assignment to demonstrate the strategy design pattern. Students implemented various strategies to compete in an iterative [Prisoner's Dilemma](https://en.wikipedia.org/wiki/Prisoner%27s_dilemma) game. In addition to the original code provided by the instructors and student strategies, this project features a greatly improved tournament runner (compared to the initially provided one) making the game both more fair and more fun in addition to providing greater insight into every strategy's performance.
 
 ## Tournament rules
+
 As played by the `BetterTournamentRunner`class
 
 * Every match of the tournament has a **finite** but initially unknown (randomized) **number of rounds** per match
@@ -27,6 +28,17 @@ As played by the `BetterTournamentRunner`class
   * If strategies are tied at the elimination cutoff score, they persist
 * The scores are then summed up again for the remaining contestants, repeating the elimination process
 * If no contestants could be eliminated due to ties or if less than 3 strategies are remaining (since a match between 2 strategies would heavily favour an always-defect strategy, while 3 strategies allows for gaining an advantage through cooperation), no more eliminations take place and the final winners are determined
+
+## How to run
+
+To run a tournament, add instances of all strategies that should compete to the `players` list in `Main.java` and run the main method.
+
+## Creating a new strategy
+To create a new strategy, create a corresponding class implementing the `GameStrategy` interface. 
+
+Its `playRound` method receives a `GameState` object as a parameter, which contains the `GameStrategy` objects `player1` and `player2`, as well as the previous player actions of the current match in the respective list objects `player1Actions` and `player2Actions`. Note that the strategy that `playRound` is called on is not necessarily the first player in the `GameState` it receives.
+
+Using this information, the method must return one of the two `GameAction` enum elements `GameAction.COOPERATE` or `GameAction.DEFECT`.
 
 ## Credits
 
