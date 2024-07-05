@@ -13,6 +13,7 @@ import java.util.Random;
 public class BetterTournamentRunner {
     private final List<GameStrategy> players;
     private final Map<GameStrategy, Integer> playerNumbers = new HashMap<>();
+    private boolean anticheat = false;
 
     private static final Random rng = new Random();
 
@@ -21,6 +22,11 @@ public class BetterTournamentRunner {
         for (var player : players) {
             playerNumbers.put(player, players.indexOf(player));
         }
+    }
+
+    public BetterTournamentRunner(List<GameStrategy> players, boolean anticheat) {
+        this(players);
+        this.anticheat = anticheat;
     }
 
     public void run() {
@@ -134,7 +140,7 @@ public class BetterTournamentRunner {
 
         var game = new GameRunner(
                 nRounds,
-                true,
+                anticheat,
                 player1,
                 player2
         );
