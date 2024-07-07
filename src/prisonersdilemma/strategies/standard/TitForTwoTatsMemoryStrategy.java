@@ -4,11 +4,12 @@ import prisonersdilemma.GameAction;
 import prisonersdilemma.GameState;
 import prisonersdilemma.strategies.GameStrategy;
 
-public class PureTitForTatStrategy implements GameStrategy {
+public class TitForTwoTatsMemoryStrategy implements GameStrategy {
+    int defectCount = 0;
 
     @Override
     public String getName() {
-        return "VanillaTitForTat";
+        return "TFTTwithBetterMemory";
     }
 
     @Override
@@ -16,10 +17,20 @@ public class PureTitForTatStrategy implements GameStrategy {
         var otherPlayerActions = state.player1() == this ? state.player2Actions() : state.player1Actions();
 
         if (otherPlayerActions.isEmpty()) {
+            defectCount = 0;
             return GameAction.COOPERATE;
         }
 
-        return otherPlayerActions.getLast();
+        if(otherPlayerActions.getLast() == GameAction.DEFECT) {
+            defectCount++;
+        }
+
+        if(defectCount == 2) {
+            defectCount = 0;
+            return GameAction.DEFECT;
+        }
+
+        return GameAction.COOPERATE;
     }
 
 }

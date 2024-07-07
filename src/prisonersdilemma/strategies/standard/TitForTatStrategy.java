@@ -4,12 +4,11 @@ import prisonersdilemma.GameAction;
 import prisonersdilemma.GameState;
 import prisonersdilemma.strategies.GameStrategy;
 
-public class TFTTAdvancedStrategy implements GameStrategy {
-    int defectCount = 0;
+public class TitForTatStrategy implements GameStrategy {
 
     @Override
     public String getName() {
-        return "TFTTwithBetterMemory";
+        return "VanillaTitForTat";
     }
 
     @Override
@@ -17,20 +16,10 @@ public class TFTTAdvancedStrategy implements GameStrategy {
         var otherPlayerActions = state.player1() == this ? state.player2Actions() : state.player1Actions();
 
         if (otherPlayerActions.isEmpty()) {
-            defectCount = 0;
             return GameAction.COOPERATE;
         }
 
-        if(otherPlayerActions.getLast() == GameAction.DEFECT) {
-            defectCount++;
-        }
-
-        if(defectCount == 2) {
-            defectCount = 0;
-            return GameAction.DEFECT;
-        }
-
-        return GameAction.COOPERATE;
+        return otherPlayerActions.getLast();
     }
 
 }

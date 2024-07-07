@@ -15,7 +15,7 @@ public class Main {
             new CopyOppositeStrategy(),
             new AlwaysCooperateStrategy(),
             new RandomStrategy(),
-            new PureTitForTatStrategy(),
+            new TitForTatStrategy(),
             new BadStartTitForTatStrategy(),
             new AlwaysDefectStrategy(),
             new CopyAverageStrategy(),
@@ -26,7 +26,7 @@ public class Main {
             new AlternateCoopDefectStrategy(),
             new TwoTitsForTatStrategy(),
             new TitForTwoTatsStrategy(),
-            new TFTTAdvancedStrategy(),
+            new TitForTwoTatsMemoryStrategy(),
             new ProbabilityCopyStrategy(),
 
             // Other student's strategies
