@@ -19,6 +19,8 @@ public class Main {
             new BadStartTitForTatStrategy(),
             new AlwaysDefectStrategy(),
             new GrimTriggerStrategy(),
+            new AppeaseStrategy(),
+            new AngryAppeaseStrategy(),
             new AlternateDefectCoopStrategy(),
             new AlternateCoopDefectStrategy(),
             new TwoTitsForTatStrategy(),
