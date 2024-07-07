@@ -18,6 +18,7 @@ public class Main {
             new PureTitForTatStrategy(),
             new BadStartTitForTatStrategy(),
             new AlwaysDefectStrategy(),
+            new CopyAverageStrategy(),
             new GrimTriggerStrategy(),
             new AppeaseStrategy(),
             new AngryAppeaseStrategy(),
@@ -26,6 +27,7 @@ public class Main {
             new TwoTitsForTatStrategy(),
             new TitForTwoTatsStrategy(),
             new TFTTAdvancedStrategy(),
+            new ProbabilityCopyStrategy(),
 
             // Other student's strategies
             new Agent47(),
