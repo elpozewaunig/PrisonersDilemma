@@ -142,6 +142,7 @@ public class BetterTournamentRunner {
         System.out.println(playerNumbers.size() + " strategies competed");
         System.out.println("A match consisted of " + nRounds + " rounds");
         System.out.println(results.size()/2 + " matches were played");
+        System.out.println("Anticheat was " + (anticheat ? "enabled" : "disabled"));
         if(errorCount > 0) {
             System.out.print("\033[31m");
         }
