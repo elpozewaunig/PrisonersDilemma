@@ -4,7 +4,7 @@ import prisonersdilemma.GameAction;
 import prisonersdilemma.GameState;
 import prisonersdilemma.strategies.GameStrategy;
 
-public class PureTitForTatStrategy implements GameStrategy {
+public class TitForTatStrategy implements GameStrategy {
 
     @Override
     public String getName() {

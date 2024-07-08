@@ -4,33 +4,34 @@ import prisonersdilemma.GameAction;
 import prisonersdilemma.GameState;
 import prisonersdilemma.strategies.GameStrategy;
 
-public class TFTTAdvancedStrategy implements GameStrategy {
-    int defectCount = 0;
-
-    @Override
+public class CopyAverageStrategy implements GameStrategy {
     public String getName() {
-        return "TFTTwithBetterMemory";
+        return "CopyAverage";
     }
 
-    @Override
     public GameAction playRound(GameState state) {
         var otherPlayerActions = state.player1() == this ? state.player2Actions() : state.player1Actions();
 
         if (otherPlayerActions.isEmpty()) {
-            defectCount = 0;
             return GameAction.COOPERATE;
         }
 
-        if(otherPlayerActions.getLast() == GameAction.DEFECT) {
-            defectCount++;
+        int cooperateCount = 0;
+        int defectCount = 0;
+        for(GameAction act : otherPlayerActions) {
+            if(act == GameAction.COOPERATE) {
+                cooperateCount++;
+            }
+            else {
+                defectCount++;
+            }
         }
 
-        if(defectCount == 2) {
-            defectCount = 0;
+        if(cooperateCount > defectCount) {
+            return GameAction.COOPERATE;
+        }
+        else {
             return GameAction.DEFECT;
         }
-
-        return GameAction.COOPERATE;
     }
-
 }

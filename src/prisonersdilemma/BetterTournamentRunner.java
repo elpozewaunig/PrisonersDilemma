@@ -17,6 +17,8 @@ public class BetterTournamentRunner {
 
     private static final Random rng = new Random();
 
+    private int errorCount = 0;
+
     public BetterTournamentRunner(List<GameStrategy> players) {
         this.players = players;
         for (var player : players) {
@@ -45,6 +47,7 @@ public class BetterTournamentRunner {
 
         // Pit every strategy against every other strategy
         System.out.println("\n====== MATCHES ======");
+        errorCount = 0;
         List<StrategyMatchResult> results = new ArrayList<>();
         for(int playerIndex = 0; playerIndex < players.size(); playerIndex++) {
             for(int opponentIndex = 0; opponentIndex < players.size(); opponentIndex++) {
@@ -134,6 +137,15 @@ public class BetterTournamentRunner {
         else {
             System.out.println("No strategies competed!");
         }
+
+        System.out.println("\nStats:");
+        System.out.println(playerNumbers.size() + " strategies competed");
+        System.out.println("A match consisted of " + nRounds + " rounds");
+        System.out.println(results.size()/2 + " matches were played");
+        if(errorCount > 0) {
+            System.out.print("\033[31m");
+        }
+        System.out.println(errorCount + " of them resulted in an error or exception \033[0m");
     }
 
     private void playRound(GameStrategy player1, GameStrategy player2, List<StrategyMatchResult> results, int nRounds) {
@@ -145,18 +157,34 @@ public class BetterTournamentRunner {
                 player2
         );
 
-        var result = game.play();
+        try {
+            GameResult result = game.play();
 
-        results.add(new StrategyMatchResult(player1, result.player1Score(), player2));
-        results.add(new StrategyMatchResult(player2, result.player2Score(), player1));
+            results.add(new StrategyMatchResult(player1, result.player1Score(), player2));
+            results.add(new StrategyMatchResult(player2, result.player2Score(), player1));
 
-        System.out.printf("%s#%d vs %s#%d: %d:%d%n",
+            printMatchResult(player1, player2, result.player1Score(), result.player2Score());
+            System.out.println();
+        }
+        catch(Throwable e) {
+            results.add(new StrategyMatchResult(player1, 0, player2));
+            results.add(new StrategyMatchResult(player2, 0, player1));
+            errorCount++;
+
+            printMatchResult(player1, player2, 0, 0);
+            System.out.print("\033[1m -> \033[41m " + e.getClass().getSimpleName() + " \033[0m");
+            System.out.println();
+        }
+    }
+
+    public void printMatchResult(GameStrategy player1, GameStrategy player2, int player1Score, int player2Score) {
+        System.out.printf("%s#%d vs %s#%d: %d:%d",
                 player1.getName(),
                 playerNumbers.get(player1),
                 player2.getName(),
                 playerNumbers.get(player2),
-                result.player1Score(),
-                result.player2Score()
+                player1Score,
+                player2Score
         );
     }
 

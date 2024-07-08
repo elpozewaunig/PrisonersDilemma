@@ -1,4 +1,4 @@
-package prisonersdilemma.strategies.q1;
+package prisonersdilemma.strategies.others;
 
 import prisonersdilemma.GameAction;
 import prisonersdilemma.GameState;
@@ -7,7 +7,7 @@ import prisonersdilemma.strategies.GameStrategy;
 import java.util.List;
 import java.util.Random;
 
-public class PozewaunigStrategy implements GameStrategy {
+public class ForgivingTitForTatAlsoHasRabiesStrategy implements GameStrategy {
   private static final float probabilityOfForgiveness = 0.01f;
 
   private boolean preventForgiveness = true;
@@ -18,17 +18,13 @@ public class PozewaunigStrategy implements GameStrategy {
 
   @Override
   public String getName() {
-    return "\033[34;1m" + "ForgivingTitForTat(AlsoHasRabies)" + "\033[0m";
+    return "WorseForgivingTitForTat";
   }
 
   @Override
   public GameAction playRound(GameState state) {
-    List<GameAction> opponentTurns = opponentTurns(state);
-
-    boolean alwaysDefectSwitch = false;
-
-    // If there are no player actions, we know that a new round has started
-    if(opponentTurns.isEmpty()) {
+    // If there are no player actions but there previously were, we know that a new round has started
+    if(state.player1Actions().isEmpty() || state.player2Actions().isEmpty()) {
       currentTurn = 0;
     }
     else {
@@ -36,7 +32,7 @@ public class PozewaunigStrategy implements GameStrategy {
     }
 
     // If no actions are in the game state even though we know there previously were, we know that the first round is over
-    if((opponentTurns.isEmpty()) && turnPlayed) {
+    if((state.player1Actions().isEmpty() || state.player2Actions().isEmpty()) && turnPlayed) {
       firstRoundPlayed = true;
     }
 
@@ -51,42 +47,23 @@ public class PozewaunigStrategy implements GameStrategy {
       numOfTurns = currentTurn;
     }
 
-    // Analyze initial turns of opponent and decide whether to always defect or play tit-for-tat
-    // If opponent defects in the first five rounds, two scenarios are likely
-    // Scenario 1: The opponent might take the risk to "probe" our strategy to test its reaction to a defect
-    // In this case we allow exactly one opponent defect,
-    // and continue to play tit-for-tat if the opponent resumes playing tit-for-tat too
-    // Scenario 2: The opponent is likely to either play random patterns or always defect
-    // In case of "random", we will make bigger average gains by defecting.
-    // In case of "always defect", we prevent any chance of forgiveness.
-    // Thus, if more than one defect occurs during the analysis, we switch to only defecting
-    // "Always cooperate" will still be played against with our classic tit-for-tat as no defects occur
-    // We don't want to risk "angering" the opponent strategy, by testing whether they truly are tit-for-tat
-    // as that might hurt our score substantially if they are.
-    int analyzeDepth = 5;
-    int analysisDefectCount = 0;
-    // currentTurn must be bigger than analyzeDepth, as the current turn doesn't have any associated game actions yet
-    if(currentTurn > analyzeDepth) {
-      // We stop before analyzeDepth, as the turn index starts at 0, analyzeDepth starts at 1
-      for(int i = 0; i < analyzeDepth; i++) {
-        if(opponentTurns.get(i) == GameAction.DEFECT) {
-          analysisDefectCount++;
-        }
-      }
-
-      if(analysisDefectCount > 1) {
-        alwaysDefectSwitch = true;
-      }
-    }
-
     // If we are on the last turn, we always defect, since the opponent can not retaliate
     // The "also has rabies" part of my strategy, we have to bite at the very end <3
-    if((currentTurn >= numOfTurns && firstRoundPlayed) || alwaysDefectSwitch) {
+    if(currentTurn == numOfTurns && firstRoundPlayed) {
       return GameAction.DEFECT;
     }
 
+    // Obtain list of other player's actions
+    List<GameAction> otherPlayerAction;
+    if(this == state.player1()) {
+      otherPlayerAction = state.player2Actions();
+    }
+    else {
+      otherPlayerAction = state.player1Actions();
+    }
+
     // Start by cooperating
-    if(opponentTurns.isEmpty()) {
+    if(state.player1Actions().isEmpty()) {
       return GameAction.COOPERATE;
     }
 
@@ -96,7 +73,7 @@ public class PozewaunigStrategy implements GameStrategy {
     // if the opponent is a "rational" actor that was "testing the waters"
     // We may potentially score lower than the opponent by doing this
     // But we should accumulate more points than without this switch, as this allows us to get back to larger gains
-    if(opponentTurns.getLast() == GameAction.DEFECT && !preventForgiveness) {
+    if(otherPlayerAction.getLast() == GameAction.DEFECT && !preventForgiveness) {
 
       Random r = new Random();
       if(r.nextFloat() < probabilityOfForgiveness) {
@@ -119,23 +96,14 @@ public class PozewaunigStrategy implements GameStrategy {
     }
 
     // We previously forgave the opponent and the opponent does cooperate again
-    if(opponentTurns.getLast() == GameAction.COOPERATE) {
+    if(otherPlayerAction.getLast() == GameAction.COOPERATE && preventForgiveness) {
       preventForgiveness = false;
       // We allow forgiveness again
     }
 
     // The "tit-for-tat" part
     // We perform a classic tit-for-tat in most cases
-    return opponentTurns.getLast();
-  }
-
-  private List<GameAction> opponentTurns(GameState state) {
-    if(this == state.player1()) {
-      return state.player2Actions();
-    }
-    else {
-      return state.player1Actions();
-    }
+    return otherPlayerAction.getLast();
   }
 
 }
