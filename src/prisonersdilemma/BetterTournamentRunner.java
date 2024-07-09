@@ -34,9 +34,7 @@ public class BetterTournamentRunner {
         // Calibrate every player by pitting them against always defect
         System.out.println("\n====== CALIBRATION ======");
         for(int playerIndex = 0; playerIndex < players.size(); playerIndex++) {
-            if(playerIndex != 0) {
-                playRound(new AlwaysDefectStrategy(), players.get(playerIndex), new ArrayList<>(), nRounds);
-            }
+            playRound(new AlwaysDefectStrategy(), players.get(playerIndex), new ArrayList<>(), nRounds);
         }
 
         // Pit every strategy against every other strategy
