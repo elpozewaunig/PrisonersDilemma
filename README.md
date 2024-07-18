@@ -29,6 +29,12 @@ As played by the `BetterTournamentRunner`class
 * The scores are then summed up again for the remaining contestants, repeating the elimination process
 * If no contestants could be eliminated due to ties or if less than 3 strategies are remaining (since a match between 2 strategies would heavily favour an always-defect strategy, while 3 strategies allows for gaining an advantage through cooperation), no more eliminations take place and the final winners are determined
 
+### Optional Configuration
+#### Anticheat
+Since the original tournament runner passed both competing strategy objects on in a `GameState`, this behaviour is preserved in the `BetterTournamentRunner` to ensure compatibility with all student strategies. However, this leads to some interesting possibilities, enabling strategies to directly interact with each other and attempt to read, predict or manipulate their opponent. As this behaviour can potentially lead to some very different outcomes compared to the traditional prisoner's dilemma, a mechanism preventing such interference can be enabled in the `BetterTournamentRunner` by setting the `anticheat` parameter in its constructor to `true`.
+
+If a tournament is instantiated without the parameter being set, it will default to `false`, mimicking the rules of the original tournament.
+
 ## How to run
 
 To run a tournament, add instances of all strategies that should compete to the `players` list in `Main.java` and run the main method.

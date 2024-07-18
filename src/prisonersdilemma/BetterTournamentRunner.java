@@ -13,6 +13,7 @@ import java.util.Random;
 public class BetterTournamentRunner {
     private final List<GameStrategy> players;
     private final Map<GameStrategy, Integer> playerNumbers = new HashMap<>();
+    private boolean anticheat = false;
 
     private static final Random rng = new Random();
 
@@ -23,6 +24,11 @@ public class BetterTournamentRunner {
         for (var player : players) {
             playerNumbers.put(player, players.indexOf(player));
         }
+    }
+
+    public BetterTournamentRunner(List<GameStrategy> players, boolean anticheat) {
+        this(players);
+        this.anticheat = anticheat;
     }
 
     public void run() {
@@ -134,6 +140,7 @@ public class BetterTournamentRunner {
         System.out.println(playerNumbers.size() + " strategies competed");
         System.out.println("A match consisted of " + nRounds + " rounds");
         System.out.println(results.size()/2 + " matches were played");
+        System.out.println("Anticheat was " + (anticheat ? "enabled" : "disabled"));
         if(errorCount > 0) {
             System.out.print("\033[31m");
         }
@@ -144,6 +151,7 @@ public class BetterTournamentRunner {
 
         var game = new GameRunner(
                 nRounds,
+                anticheat,
                 player1,
                 player2
         );
