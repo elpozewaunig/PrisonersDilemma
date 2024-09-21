@@ -10,6 +10,7 @@ As played by the `BetterTournamentRunner`class
 * To keep things fair, the **number of rounds does not change** throughout one tournament, since otherwise some strategies might unfairly gain more points than others by playing more rounds
   * This means that strategies may count the rounds to gain an advantage in subsequent rounds
   * In order not to give the first competitor of any strategy an advantage (since no strategy knows the number of rounds in the first match and therefore can't change its behaviour accordingly, but can in the second match), all strategies are granted a "calibration" round against an always defecting strategy
+  * The scores of the calibration round are discarded and do not affect the tournament score
 * Multiple instances of the same strategy may compete, the **results are on a per-instance basis**, not a per-class basis as this might give strategies with multiple instances in the tournament an advantage
 * All strategies **play against every other strategy** twice (once as player 1, once as player 2)
 * Every round of a match grants the strategy either 0, 1, 3 or 5 points depending on the opponent's decision (see table)
