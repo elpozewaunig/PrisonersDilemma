@@ -1,6 +1,6 @@
 package prisonersdilemma;
 
-import prisonersdilemma.strategies.others.*;
+import prisonersdilemma.strategies.omi_s24.*;
 import prisonersdilemma.strategies.q1.*;
 import prisonersdilemma.strategies.standard.*;
 
@@ -29,7 +29,7 @@ public class Main {
             new TitForTwoTatsMemoryStrategy(),
             new ProbabilityCopyStrategy(),
 
-            // Other student's strategies
+            // Other student's strategies (OMI 24S)
             new Agent47(),
             new Agent48(),
             new CloneStrat3000Strategy(),

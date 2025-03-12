@@ -1,4 +1,4 @@
-package prisonersdilemma.strategies.others;
+package prisonersdilemma.strategies.omi_s24;
 
 import prisonersdilemma.GameAction;
 import prisonersdilemma.GameState;
