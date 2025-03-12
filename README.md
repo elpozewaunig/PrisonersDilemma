@@ -6,7 +6,7 @@ This is a Java project created as part of the Object-oriented modelling and impl
 
 As played by the `BetterTournamentRunner`class
 
-* Every match of the tournament has a **finite** but initially unknown (randomized) **number of rounds** per match
+* Every match of the tournament has a **finite number of rounds** per match, but the number is initially unknown to competing strategies (and optionally randomized)
 * To keep things fair, the **number of rounds does not change** throughout one tournament, since otherwise some strategies might unfairly gain more points than others by playing more rounds
   * This means that strategies may count the rounds to gain an advantage in subsequent rounds
   * In order not to give the first competitor of any strategy an advantage (since no strategy knows the number of rounds in the first match and therefore can't change its behaviour accordingly, but can in the second match), all strategies are granted a "calibration" round against an always defecting strategy
@@ -38,7 +38,7 @@ If a tournament is instantiated without the parameter being set, it will default
 
 ## How to run
 
-To run a tournament, add instances of all strategies that should compete to the `players` list in `Main.java` and run the main method.
+To run a tournament, add instances of all strategies that should compete to the `players` list in `Main.java` and run the main method. You can optionally give the `run()` method an integer argument, which specifies how many rounds should be played per match.
 
 ## Creating a new strategy
 To create a new strategy, create a corresponding class implementing the `GameStrategy` interface. 

@@ -32,8 +32,10 @@ public class BetterTournamentRunner {
     }
 
     public void run() {
-        int nRounds = rng.nextInt(1, 200);
+        run(rng.nextInt(1, 200));
+    }
 
+    public void run(int nRounds) {
         System.out.println("\n====== TOURNAMENT BEGINS ======");
         System.out.println("Round length: " + nRounds);
 
